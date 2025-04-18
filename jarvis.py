@@ -1,0 +1,3 @@
+def speak(audio):
+    pass
+    
