@@ -17,7 +17,7 @@ def speak(audio):
 
 def wishMe():
     hour = datetime.datetime.now().hour  # Get the current hour
-    print(f"Current hour: {hour}")  # Debugging: Print the current hour
+    # print(f"Current hour: {hour}")  # Debugging: Print the current hour
 
     if hour >= 0 and hour < 12:
         print("Executing morning greeting...")  # Debugging
@@ -51,6 +51,14 @@ def play_jarvis_boot_sound():
                 pass  # Silent fallback if no players available
 def play_jarvis_shutdown_sound():
     sound_path = os.path.expanduser("/home/mojez-hasan/project_J.A.R.V.I.S/shutdown.mp3")
+    print(r"""
+     ██╗  █████╗  ██████╗  ██╗   ██╗ ██╗  ██████╗
+     ██║ ██╔══██╗ ██╔══██╗ ██║   ██║ ██╗ ██╔════╝
+     ██║ ███████║ ██████╔╝ ██║   ██║ ██╗ ╚█████╗ 
+██   ██║ ██╔══██║ ██╔══██╗ ██║   ██║ ██╗  ╚═══██╗
+╚█████╔╝ ██║  ██║ ██║  ██║ ╚██████╔╝ ██╗ ██████╔╝
+ ╚════╝ ╚═╝  ╚═╝╚═╝  ╚═╝ ╚═════╝ ╚═════╝ 
+    """)
     
     if os.path.exists(sound_path):
         try:
@@ -80,11 +88,14 @@ def jarvis_boot_sequence():
     play_jarvis_boot_sound()
     time.sleep(4)
     speak("Initializing systems")
-    time.sleep(3)
+    print("Initializing systems")
+    time.sleep(2)
     speak("Diagnostics complete")
-    time.sleep(3)
+    print("Diagnostics complete")
+    time.sleep(2)
     speak("All systems operational")
-    time.sleep(3)
+    print("All systems operational")
+    time.sleep(2)
 
 def biometric_authentication():
     speak("please speak up for biometric authentication")
@@ -124,8 +135,10 @@ if __name__ == "__main__":
         key = biometric_authentication()
         if key == 1:
             speak("Authentication successful")
+            print("Authentication successful")
             time.sleep(3)
             speak("Initializing Jarvis")
+            print("Initializing Jarvis")
             time.sleep(3)
             jarvis_boot_sequence()
             time.sleep(2)
@@ -152,9 +165,15 @@ if __name__ == "__main__":
                 elif 'open youtube' in query:
                     speak("opening youtube")
                     webbrowser.open("youtube.com")
-                elif "exit" in query or "quit" in query:
+                elif "exit" in query or "quit" in query or "close" in query or "shutdown" in query or "stop" in query or "terminate" in query or "power off" in query or "turn off" in query:
+                    speak("shutting down")
                     play_jarvis_shutdown_sound()
-                    speak("Goodbye sir! Have a great day!")
+                    hour = datetime.datetime.now().hour
+                    if hour >= 0 and hour < 18:
+                        speak("Goodbye sir! Have a great day!")
+                    else:
+                        speak("Goodbye sir! Have a great sleep!")
+                    print("Shutting down...")
                     sys.exit(0)
 
                 elif "open google" in query:
@@ -432,7 +451,7 @@ if __name__ == "__main__":
                     print(quote)
                     speak(quote)
                 elif "introduce yourself" in query or "who are you" in query:
-                    speak(f"I am Jarvis, an A.I. assistant created by my master mojez hasan. I can help you with various tasks like searching the web, telling jokes, and providing information. {time.sleep(0.8)}my processes are linux based. i am written in python3 language .{time.sleep(1)} i may not be a perfect example of artificial intelligence, but I am always learning and improving. How can I assist you today?")
+                    speak(f"I am Jarvis, an A. I. assistant trained by my master mojez hasan. I can help you with various tasks like searching the web, telling jokes, and providing information. {time.sleep(0.8)}my processes are linux based. i am written in python3 language .{time.sleep(1)} i may not be a perfect example of artificial intelligence, but I am always learning and improving. How can I assist you today?")
                 elif "thanks" in query or "thank you" in query or "thank you very much" in query or "thanks a lot" in query or "thank you so much" in query or "nice work" in query or "good job" in query or "well done" in query or "great work" in query:
                     speak("You're welcome! I'm glad I could help you. If you need anything else, just let me know.") 
                     # speak("You're welcome! If you need anything else, just let me know.")
