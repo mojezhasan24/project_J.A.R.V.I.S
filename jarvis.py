@@ -13,9 +13,18 @@ os.environ["PYGAME_HIDE_SUPPORT_PROMPT"] = "1"
 
 
 def speak(audio):
+    """
+    Converts text to speech using the `spd-say` command.
+
+    Args:
+        audio (str): The text to be spoken.
+    """
     subprocess.call(["spd-say", audio])
 
 def wishMe():
+    """
+    Greets the user based on the current time of day.
+    """
     hour = datetime.datetime.now().hour  # Get the current hour
     # print(f"Current hour: {hour}")  # Debugging: Print the current hour
 
@@ -33,6 +42,9 @@ def wishMe():
         time.sleep(1)
 
 def play_jarvis_boot_sound():
+    """
+    Plays the boot sound for Jarvis using available audio players.
+    """
     sound_path = os.path.expanduser("/home/mojez-hasan/project_J.A.R.V.I.S/boot.mp3")
     
     if os.path.exists(sound_path):
@@ -50,6 +62,9 @@ def play_jarvis_boot_sound():
             except:
                 pass  # Silent fallback if no players available
 def play_jarvis_shutdown_sound():
+    """
+    Plays the shutdown sound for Jarvis using available audio players.
+    """
     sound_path = os.path.expanduser("/home/mojez-hasan/project_J.A.R.V.I.S/shutdown.mp3")
     print(r"""
      ██╗  █████╗  ██████╗  ██╗   ██╗ ██╗  ██████╗
@@ -76,6 +91,10 @@ def play_jarvis_shutdown_sound():
                 pass  # Silent fallback if no players available
 
 def jarvis_boot_sequence():
+    """
+    Executes the boot sequence for Jarvis, including playing the boot sound
+    and providing system initialization updates.
+    """
     print(r"""
      ██╗  █████╗  ██████╗  ██╗   ██╗ ██╗  ██████╗
      ██║ ██╔══██╗ ██╔══██╗ ██║   ██║ ██╗ ██╔════╝
@@ -104,10 +123,23 @@ def biometric_authentication():
     else:
         speak("authentication failed")
         return 0
+    """
+    Performs biometric authentication by asking the user to say a specific phrase.
+
+    Returns:
+        int: 1 if authentication is successful, 0 otherwise.
+    """
     
 def takeCommand():
-    # This function will take microphone input and return the string output
-    # You can implement this function using speech recognition libraries
+    """
+    Listens to the user's voice input and converts it to text using Google's Speech Recognition API.
+
+    Returns:
+        str: The recognized text from the user's voice input, or "None" if recognition fails.
+        This function will take microphone input and return the string output
+        You can implement this function using speech recognition libraries
+    """
+    
     r = sr.Recognizer()
     with sr.Microphone() as source:
         print("Listening...")
